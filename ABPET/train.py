@@ -16,8 +16,8 @@ import torch
 from torch.utils.data import DataLoader
 
 from dataset import PETDataset
-from model import BaselineCNN
-from losses import get_criterion
+from models.model import BaselineCNN
+from models.losses import get_criterion
 
 try:
     import matplotlib

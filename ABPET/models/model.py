@@ -67,4 +67,4 @@ class BaselineCNN(nn.Module):
         features = self.gap(features).flatten(1)             # (B, 256)
         tracer_features = self.tracer_emb(tracer_idx)        # (B, emb_dim)
         combined = torch.cat([features, tracer_features], 1) # (B, 264)
-        return self.head(combined).squeeze(1)                # (B,)
+        return self.head(combined).squeeze(1)                # (B, )
