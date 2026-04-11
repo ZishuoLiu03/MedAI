@@ -1,5 +1,0 @@
-import pandas as pd
-df = pd.read_csv("/projectnb/medaihack/ABPET/data/train.csv", low_memory=False)
-for tracer, g in df.groupby("TRACER.AMY"):
-    print(tracer, len(g))
-    display(g.head(2000))
