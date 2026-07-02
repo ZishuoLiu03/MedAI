@@ -113,7 +113,7 @@ This initialization guarantees that the network starts training as a standard, s
 ### Version 1 (Baseline 3D CNN)
 The baseline model training exhibits higher volatility, with validation performance oscillating:
 
-![Version 1 Learning Curves](results/curves_20260410_130422.png)
+![Version 1 Learning Curves](ABPET/results/curves_20260410_130422.png)
 
 ### Version 2 (3D ResNet-18 + FiLM)
 The training progression for Version 2 shows a highly stable, smooth optimization curve, with validation MAE descending steadily to **9.52 CL** without oscillating:
