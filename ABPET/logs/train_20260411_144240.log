@@ -1,0 +1,17 @@
+2026-04-11 14:42:40 | Args: {'train_csv': '/projectnb/medaihack/ABPET/data/train.csv', 'val_csv': '/projectnb/medaihack/ABPET/data/val.csv', 'epochs': 100, 'batch_size': 2, 'lr': 3e-05, 'num_workers': 4, 'resnet_depth': 18, 'embed_dim': 64, 'dropout': 0.5, 'checkpoint_dir': 'checkpoints', 'cache': False, 'loss': 'mae', 'patience': 15, 'max_grad_norm': 1.0, 'scheduler': 'plateau', 'lr_factor': 0.5, 'lr_patience': 2, 'lr_cooldown': 0, 'min_lr': 1e-06, 'compile': False, 'log_dir': 'logs', 'results_dir': 'results'}
+2026-04-11 14:42:40 | Device: cuda
+2026-04-11 14:42:41 | Model parameters: 33,324,993
+2026-04-11 14:42:41 | ResNet depth: 18
+2026-04-11 14:43:00 | Epoch   1/100 | Loss: 29.1793 | MAE: 29.30 CL | r: 0.3314 | LR: 3.00e-05 | 17.9s | ES patience: 0/15 [*]
+2026-04-11 14:43:17 | Epoch   2/100 | Loss: 28.3509 | MAE: 28.12 CL | r: 0.5384 | LR: 3.00e-05 | 17.1s | ES patience: 0/15 [*]
+2026-04-11 14:43:35 | Epoch   3/100 | Loss: 27.3029 | MAE: 27.36 CL | r: 0.4941 | LR: 3.00e-05 | 17.2s | ES patience: 0/15 [*]
+2026-04-11 14:43:52 | Epoch   4/100 | Loss: 25.2824 | MAE: 25.08 CL | r: 0.7745 | LR: 3.00e-05 | 17.1s | ES patience: 0/15 [*]
+2026-04-11 14:44:10 | Epoch   5/100 | Loss: 23.2126 | MAE: 22.00 CL | r: 0.7538 | LR: 3.00e-05 | 17.1s | ES patience: 0/15 [*]
+2026-04-11 14:44:28 | Epoch   6/100 | Loss: 20.7692 | MAE: 19.38 CL | r: 0.8482 | LR: 3.00e-05 | 17.4s | ES patience: 0/15 [*]
+2026-04-11 14:44:45 | Epoch   7/100 | Loss: 18.4908 | MAE: 18.16 CL | r: 0.8469 | LR: 3.00e-05 | 17.2s | ES patience: 0/15 [*]
+2026-04-11 14:45:03 | Epoch   8/100 | Loss: 16.9632 | MAE: 15.96 CL | r: 0.8750 | LR: 3.00e-05 | 17.2s | ES patience: 0/15 [*]
+2026-04-11 14:45:21 | Epoch   9/100 | Loss: 15.6006 | MAE: 14.98 CL | r: 0.8836 | LR: 3.00e-05 | 17.3s | ES patience: 0/15 [*]
+2026-04-11 14:45:38 | Epoch  10/100 | Loss: 14.4155 | MAE: 15.24 CL | r: 0.8572 | LR: 3.00e-05 | 17.3s | ES patience: 1/15
+2026-04-11 14:45:56 | Epoch  11/100 | Loss: 13.5949 | MAE: 12.91 CL | r: 0.8884 | LR: 3.00e-05 | 17.5s | ES patience: 0/15 [*]
+2026-04-11 14:46:13 | Epoch  12/100 | Loss: 12.6603 | MAE: 13.69 CL | r: 0.8790 | LR: 3.00e-05 | 17.5s | ES patience: 1/15
+2026-04-11 14:46:31 | Epoch  13/100 | Loss: 12.1045 | MAE: 12.35 CL | r: 0.9000 | LR: 3.00e-05 | 17.4s | ES patience: 0/15 [*]

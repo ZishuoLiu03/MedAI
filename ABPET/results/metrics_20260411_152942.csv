@@ -1,0 +1,1 @@
+epoch,train_loss,val_mae,val_corr,lr,epoch_time_s,is_best

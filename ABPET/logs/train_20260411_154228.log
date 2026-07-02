@@ -1,0 +1,12 @@
+2026-04-11 15:42:28 | Args: {'train_csv': '/projectnb/medaihack/ABPET/data/train.csv', 'val_csv': '/projectnb/medaihack/ABPET/data/val.csv', 'epochs': 100, 'batch_size': 2, 'lr': 2e-05, 'num_workers': 4, 'resnet_depth': 18, 'embed_dim': 64, 'dropout': 0.5, 'checkpoint_dir': 'checkpoints', 'cache': False, 'loss': 'mae', 'patience': 15, 'max_grad_norm': 1.0, 'scheduler': 'plateau', 'lr_factor': 0.5, 'lr_patience': 2, 'lr_cooldown': 0, 'min_lr': 1e-08, 'compile': False, 'log_dir': 'logs', 'results_dir': 'results'}
+2026-04-11 15:42:28 | Device: cuda
+2026-04-11 15:42:28 | Model parameters: 33,433,409
+2026-04-11 15:42:28 | ResNet depth: 18
+2026-04-11 15:42:48 | Epoch   1/100 | Loss: 30.1241 | MAE: 30.76 CL | r: -0.0547 | LR: 2.00e-05 | 18.8s | ES patience: 0/15 [*]
+2026-04-11 15:43:07 | Epoch   2/100 | Loss: 29.8906 | MAE: 30.61 CL | r: 0.0065 | LR: 2.00e-05 | 17.9s | ES patience: 0/15 [*]
+2026-04-11 15:43:25 | Epoch   3/100 | Loss: 29.9206 | MAE: 30.42 CL | r: -0.0253 | LR: 2.00e-05 | 17.6s | ES patience: 0/15 [*]
+2026-04-11 15:43:43 | Epoch   4/100 | Loss: 29.7982 | MAE: 30.35 CL | r: 0.0377 | LR: 2.00e-05 | 18.3s | ES patience: 0/15 [*]
+2026-04-11 15:44:02 | Epoch   5/100 | Loss: 29.7082 | MAE: 30.22 CL | r: 0.1987 | LR: 2.00e-05 | 18.2s | ES patience: 0/15 [*]
+2026-04-11 15:44:21 | Epoch   6/100 | Loss: 29.6606 | MAE: 30.15 CL | r: 0.1649 | LR: 2.00e-05 | 18.2s | ES patience: 0/15 [*]
+2026-04-11 15:44:39 | Epoch   7/100 | Loss: 29.3211 | MAE: 29.56 CL | r: 0.3790 | LR: 2.00e-05 | 18.4s | ES patience: 0/15 [*]
+2026-04-11 15:44:58 | Epoch   8/100 | Loss: 28.9766 | MAE: 29.89 CL | r: 0.3683 | LR: 2.00e-05 | 18.2s | ES patience: 1/15

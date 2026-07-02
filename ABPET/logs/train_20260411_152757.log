@@ -1,0 +1,2 @@
+2026-04-11 15:27:57 | Args: {'train_csv': '/projectnb/medaihack/ABPET/data/train.csv', 'val_csv': '/projectnb/medaihack/ABPET/data/val.csv', 'epochs': 100, 'batch_size': 2, 'lr': 2e-05, 'num_workers': 4, 'resnet_depth': 18, 'embed_dim': 64, 'dropout': 0.5, 'checkpoint_dir': 'checkpoints', 'cache': False, 'loss': 'mae', 'patience': 15, 'max_grad_norm': 1.0, 'scheduler': 'plateau', 'lr_factor': 0.5, 'lr_patience': 2, 'lr_cooldown': 0, 'min_lr': 1e-08, 'compile': False, 'log_dir': 'logs', 'results_dir': 'results'}
+2026-04-11 15:27:58 | Device: cuda

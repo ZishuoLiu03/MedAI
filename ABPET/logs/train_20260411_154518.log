@@ -1,0 +1,81 @@
+2026-04-11 15:45:18 | Args: {'train_csv': '/projectnb/medaihack/ABPET/data/train.csv', 'val_csv': '/projectnb/medaihack/ABPET/data/val.csv', 'epochs': 100, 'batch_size': 2, 'lr': 4e-05, 'num_workers': 4, 'resnet_depth': 18, 'embed_dim': 64, 'dropout': 0.5, 'checkpoint_dir': 'checkpoints', 'cache': False, 'loss': 'mae', 'patience': 15, 'max_grad_norm': 1.0, 'scheduler': 'plateau', 'lr_factor': 0.5, 'lr_patience': 2, 'lr_cooldown': 0, 'min_lr': 1e-08, 'compile': False, 'log_dir': 'logs', 'results_dir': 'results'}
+2026-04-11 15:45:18 | Device: cuda
+2026-04-11 15:45:19 | Model parameters: 33,433,409
+2026-04-11 15:45:19 | ResNet depth: 18
+2026-04-11 15:45:39 | Epoch   1/100 | Loss: 29.2924 | MAE: 30.00 CL | r: -0.0152 | LR: 4.00e-05 | 18.9s | ES patience: 0/15 [*]
+2026-04-11 15:45:58 | Epoch   2/100 | Loss: 28.9547 | MAE: 29.91 CL | r: 0.1490 | LR: 4.00e-05 | 18.1s | ES patience: 0/15 [*]
+2026-04-11 15:46:16 | Epoch   3/100 | Loss: 28.9213 | MAE: 29.59 CL | r: 0.1793 | LR: 4.00e-05 | 18.1s | ES patience: 0/15 [*]
+2026-04-11 15:46:35 | Epoch   4/100 | Loss: 28.8396 | MAE: 29.45 CL | r: 0.2091 | LR: 4.00e-05 | 18.3s | ES patience: 0/15 [*]
+2026-04-11 15:46:53 | Epoch   5/100 | Loss: 28.6865 | MAE: 28.76 CL | r: 0.3833 | LR: 4.00e-05 | 18.1s | ES patience: 0/15 [*]
+2026-04-11 15:47:12 | Epoch   6/100 | Loss: 27.8183 | MAE: 28.69 CL | r: 0.4164 | LR: 4.00e-05 | 17.9s | ES patience: 0/15 [*]
+2026-04-11 15:47:30 | Epoch   7/100 | Loss: 27.1731 | MAE: 26.75 CL | r: 0.7180 | LR: 4.00e-05 | 18.2s | ES patience: 0/15 [*]
+2026-04-11 15:47:49 | Epoch   8/100 | Loss: 24.9458 | MAE: 24.29 CL | r: 0.7657 | LR: 4.00e-05 | 18.1s | ES patience: 0/15 [*]
+2026-04-11 15:48:07 | Epoch   9/100 | Loss: 21.8945 | MAE: 21.02 CL | r: 0.8100 | LR: 4.00e-05 | 18.2s | ES patience: 0/15 [*]
+2026-04-11 15:48:26 | Epoch  10/100 | Loss: 19.0611 | MAE: 19.28 CL | r: 0.8416 | LR: 4.00e-05 | 18.3s | ES patience: 0/15 [*]
+2026-04-11 15:48:45 | Epoch  11/100 | Loss: 16.7214 | MAE: 16.59 CL | r: 0.8632 | LR: 4.00e-05 | 18.4s | ES patience: 0/15 [*]
+2026-04-11 15:49:04 | Epoch  12/100 | Loss: 15.3198 | MAE: 15.10 CL | r: 0.8729 | LR: 4.00e-05 | 18.4s | ES patience: 0/15 [*]
+2026-04-11 15:49:23 | Epoch  13/100 | Loss: 14.4626 | MAE: 14.00 CL | r: 0.8680 | LR: 4.00e-05 | 18.5s | ES patience: 0/15 [*]
+2026-04-11 15:49:41 | Epoch  14/100 | Loss: 13.7607 | MAE: 12.92 CL | r: 0.8976 | LR: 4.00e-05 | 18.3s | ES patience: 0/15 [*]
+2026-04-11 15:50:00 | Epoch  15/100 | Loss: 12.9753 | MAE: 12.38 CL | r: 0.9094 | LR: 4.00e-05 | 18.5s | ES patience: 0/15 [*]
+2026-04-11 15:50:19 | Epoch  16/100 | Loss: 12.6253 | MAE: 12.98 CL | r: 0.9032 | LR: 4.00e-05 | 18.6s | ES patience: 1/15
+2026-04-11 15:50:38 | Epoch  17/100 | Loss: 12.1744 | MAE: 12.25 CL | r: 0.9046 | LR: 4.00e-05 | 18.5s | ES patience: 0/15 [*]
+2026-04-11 15:50:57 | Epoch  18/100 | Loss: 11.6693 | MAE: 11.76 CL | r: 0.9149 | LR: 4.00e-05 | 18.3s | ES patience: 0/15 [*]
+2026-04-11 15:51:15 | Epoch  19/100 | Loss: 11.6106 | MAE: 12.00 CL | r: 0.9090 | LR: 4.00e-05 | 18.3s | ES patience: 1/15
+2026-04-11 15:51:34 | Epoch  20/100 | Loss: 11.4708 | MAE: 10.84 CL | r: 0.9249 | LR: 4.00e-05 | 18.5s | ES patience: 0/15 [*]
+2026-04-11 15:51:52 | Epoch  21/100 | Loss: 11.1375 | MAE: 12.68 CL | r: 0.9409 | LR: 4.00e-05 | 18.2s | ES patience: 1/15
+2026-04-11 15:52:10 | Epoch  22/100 | Loss: 11.0195 | MAE: 12.76 CL | r: 0.9379 | LR: 4.00e-05 | 18.2s | ES patience: 2/15
+2026-04-11 15:52:28 | Epoch  23/100 | Loss: 10.7910 | MAE: 11.69 CL | r: 0.9253 | LR: 2.00e-05 | 18.4s | ES patience: 0/15 [lr-reset lr↓]
+2026-04-11 15:52:47 | Epoch  24/100 | Loss: 9.5558 | MAE: 10.22 CL | r: 0.9366 | LR: 2.00e-05 | 18.2s | ES patience: 0/15 [*]
+2026-04-11 15:53:06 | Epoch  25/100 | Loss: 9.1860 | MAE: 9.91 CL | r: 0.9420 | LR: 2.00e-05 | 18.3s | ES patience: 0/15 [*]
+2026-04-11 15:53:24 | Epoch  26/100 | Loss: 8.9789 | MAE: 9.53 CL | r: 0.9568 | LR: 2.00e-05 | 18.2s | ES patience: 0/15 [*]
+2026-04-11 15:53:43 | Epoch  27/100 | Loss: 8.6429 | MAE: 9.69 CL | r: 0.9440 | LR: 2.00e-05 | 18.3s | ES patience: 1/15
+2026-04-11 15:54:01 | Epoch  28/100 | Loss: 8.5102 | MAE: 9.60 CL | r: 0.9568 | LR: 2.00e-05 | 18.5s | ES patience: 2/15
+2026-04-11 15:54:20 | Epoch  29/100 | Loss: 8.1687 | MAE: 9.55 CL | r: 0.9481 | LR: 1.00e-05 | 18.4s | ES patience: 0/15 [lr-reset lr↓]
+2026-04-11 15:54:38 | Epoch  30/100 | Loss: 7.5557 | MAE: 8.78 CL | r: 0.9553 | LR: 1.00e-05 | 18.3s | ES patience: 0/15 [*]
+2026-04-11 15:54:57 | Epoch  31/100 | Loss: 7.3673 | MAE: 8.74 CL | r: 0.9571 | LR: 1.00e-05 | 18.3s | ES patience: 0/15 [*]
+2026-04-11 15:55:16 | Epoch  32/100 | Loss: 6.9536 | MAE: 8.68 CL | r: 0.9556 | LR: 1.00e-05 | 18.4s | ES patience: 0/15 [*]
+2026-04-11 15:55:34 | Epoch  33/100 | Loss: 7.0751 | MAE: 8.71 CL | r: 0.9533 | LR: 1.00e-05 | 18.4s | ES patience: 1/15
+2026-04-11 15:55:53 | Epoch  34/100 | Loss: 6.8068 | MAE: 8.97 CL | r: 0.9536 | LR: 1.00e-05 | 18.3s | ES patience: 2/15
+2026-04-11 15:56:11 | Epoch  35/100 | Loss: 7.0763 | MAE: 9.01 CL | r: 0.9530 | LR: 5.00e-06 | 18.3s | ES patience: 0/15 [lr-reset lr↓]
+2026-04-11 15:56:30 | Epoch  36/100 | Loss: 6.5190 | MAE: 8.53 CL | r: 0.9545 | LR: 5.00e-06 | 18.4s | ES patience: 0/15 [*]
+2026-04-11 15:56:48 | Epoch  37/100 | Loss: 6.5016 | MAE: 8.51 CL | r: 0.9550 | LR: 5.00e-06 | 18.2s | ES patience: 0/15 [*]
+2026-04-11 15:57:07 | Epoch  38/100 | Loss: 6.2248 | MAE: 8.51 CL | r: 0.9554 | LR: 5.00e-06 | 18.2s | ES patience: 0/15 [*]
+2026-04-11 15:57:25 | Epoch  39/100 | Loss: 6.3494 | MAE: 8.66 CL | r: 0.9571 | LR: 5.00e-06 | 18.1s | ES patience: 1/15
+2026-04-11 15:57:43 | Epoch  40/100 | Loss: 6.1660 | MAE: 8.80 CL | r: 0.9546 | LR: 2.50e-06 | 18.2s | ES patience: 0/15 [lr-reset lr↓]
+2026-04-11 15:58:01 | Epoch  41/100 | Loss: 5.9724 | MAE: 8.84 CL | r: 0.9588 | LR: 2.50e-06 | 18.1s | ES patience: 1/15
+2026-04-11 15:58:20 | Epoch  42/100 | Loss: 5.8992 | MAE: 8.54 CL | r: 0.9581 | LR: 2.50e-06 | 18.3s | ES patience: 2/15
+2026-04-11 15:58:38 | Epoch  43/100 | Loss: 5.7835 | MAE: 8.63 CL | r: 0.9570 | LR: 1.25e-06 | 18.2s | ES patience: 0/15 [lr-reset lr↓]
+2026-04-11 15:58:56 | Epoch  44/100 | Loss: 5.8310 | MAE: 8.58 CL | r: 0.9569 | LR: 1.25e-06 | 18.4s | ES patience: 1/15
+2026-04-11 15:59:14 | Epoch  45/100 | Loss: 5.6211 | MAE: 8.64 CL | r: 0.9559 | LR: 1.25e-06 | 18.2s | ES patience: 2/15
+2026-04-11 15:59:33 | Epoch  46/100 | Loss: 5.6627 | MAE: 8.57 CL | r: 0.9569 | LR: 6.25e-07 | 18.5s | ES patience: 0/15 [lr-reset lr↓]
+2026-04-11 15:59:51 | Epoch  47/100 | Loss: 5.4502 | MAE: 8.56 CL | r: 0.9564 | LR: 6.25e-07 | 18.5s | ES patience: 1/15
+2026-04-11 16:00:10 | Epoch  48/100 | Loss: 5.6553 | MAE: 8.56 CL | r: 0.9561 | LR: 6.25e-07 | 18.6s | ES patience: 2/15
+2026-04-11 16:00:29 | Epoch  49/100 | Loss: 5.5460 | MAE: 8.65 CL | r: 0.9563 | LR: 3.13e-07 | 18.6s | ES patience: 0/15 [lr-reset lr↓]
+2026-04-11 16:00:47 | Epoch  50/100 | Loss: 5.3424 | MAE: 8.56 CL | r: 0.9571 | LR: 3.13e-07 | 18.4s | ES patience: 1/15
+2026-04-11 16:01:05 | Epoch  51/100 | Loss: 5.6982 | MAE: 8.66 CL | r: 0.9588 | LR: 3.13e-07 | 18.4s | ES patience: 2/15
+2026-04-11 16:01:24 | Epoch  52/100 | Loss: 5.6089 | MAE: 8.59 CL | r: 0.9576 | LR: 1.56e-07 | 18.4s | ES patience: 0/15 [lr-reset lr↓]
+2026-04-11 16:01:42 | Epoch  53/100 | Loss: 5.6418 | MAE: 8.58 CL | r: 0.9568 | LR: 1.56e-07 | 18.4s | ES patience: 1/15
+2026-04-11 16:02:01 | Epoch  54/100 | Loss: 5.4039 | MAE: 8.56 CL | r: 0.9568 | LR: 1.56e-07 | 18.5s | ES patience: 2/15
+2026-04-11 16:02:19 | Epoch  55/100 | Loss: 5.5214 | MAE: 8.60 CL | r: 0.9577 | LR: 7.81e-08 | 18.6s | ES patience: 0/15 [lr-reset lr↓]
+2026-04-11 16:02:38 | Epoch  56/100 | Loss: 5.6264 | MAE: 8.55 CL | r: 0.9572 | LR: 7.81e-08 | 18.6s | ES patience: 1/15
+2026-04-11 16:02:56 | Epoch  57/100 | Loss: 5.6087 | MAE: 8.58 CL | r: 0.9577 | LR: 7.81e-08 | 18.4s | ES patience: 2/15
+2026-04-11 16:03:15 | Epoch  58/100 | Loss: 5.4777 | MAE: 8.53 CL | r: 0.9582 | LR: 3.91e-08 | 18.5s | ES patience: 0/15 [lr-reset lr↓]
+2026-04-11 16:03:34 | Epoch  59/100 | Loss: 5.5907 | MAE: 8.49 CL | r: 0.9575 | LR: 3.91e-08 | 18.6s | ES patience: 0/15 [*]
+2026-04-11 16:03:52 | Epoch  60/100 | Loss: 5.6836 | MAE: 8.52 CL | r: 0.9584 | LR: 3.91e-08 | 18.3s | ES patience: 1/15
+2026-04-11 16:04:11 | Epoch  61/100 | Loss: 5.6025 | MAE: 8.48 CL | r: 0.9578 | LR: 3.91e-08 | 18.3s | ES patience: 0/15 [*]
+2026-04-11 16:04:29 | Epoch  62/100 | Loss: 5.5142 | MAE: 8.52 CL | r: 0.9571 | LR: 1.95e-08 | 18.3s | ES patience: 0/15 [lr-reset lr↓]
+2026-04-11 16:04:47 | Epoch  63/100 | Loss: 5.7546 | MAE: 8.51 CL | r: 0.9569 | LR: 1.95e-08 | 18.3s | ES patience: 1/15
+2026-04-11 16:05:06 | Epoch  64/100 | Loss: 5.4983 | MAE: 8.49 CL | r: 0.9582 | LR: 1.95e-08 | 18.5s | ES patience: 2/15
+2026-04-11 16:05:24 | Epoch  65/100 | Loss: 5.5189 | MAE: 8.58 CL | r: 0.9572 | LR: 1.95e-08 | 18.4s | ES patience: 3/15
+2026-04-11 16:05:43 | Epoch  66/100 | Loss: 5.4591 | MAE: 8.52 CL | r: 0.9575 | LR: 1.95e-08 | 18.4s | ES patience: 4/15
+2026-04-11 16:06:01 | Epoch  67/100 | Loss: 5.5504 | MAE: 8.57 CL | r: 0.9586 | LR: 1.95e-08 | 18.5s | ES patience: 5/15
+2026-04-11 16:06:20 | Epoch  68/100 | Loss: 5.5659 | MAE: 8.48 CL | r: 0.9578 | LR: 1.95e-08 | 18.6s | ES patience: 0/15 [*]
+2026-04-11 16:06:39 | Epoch  69/100 | Loss: 5.4778 | MAE: 8.70 CL | r: 0.9573 | LR: 1.95e-08 | 18.4s | ES patience: 1/15
+2026-04-11 16:06:57 | Epoch  70/100 | Loss: 5.5131 | MAE: 8.48 CL | r: 0.9587 | LR: 1.95e-08 | 18.4s | ES patience: 2/15
+2026-04-11 16:07:15 | Epoch  71/100 | Loss: 5.4327 | MAE: 8.56 CL | r: 0.9571 | LR: 1.95e-08 | 18.4s | ES patience: 3/15
+2026-04-11 16:07:34 | Epoch  72/100 | Loss: 5.4992 | MAE: 8.63 CL | r: 0.9585 | LR: 1.95e-08 | 18.4s | ES patience: 4/15
+2026-04-11 16:07:52 | Epoch  73/100 | Loss: 5.3510 | MAE: 8.58 CL | r: 0.9576 | LR: 1.95e-08 | 18.3s | ES patience: 5/15
+2026-04-11 16:08:10 | Epoch  74/100 | Loss: 5.4597 | MAE: 8.49 CL | r: 0.9575 | LR: 1.95e-08 | 18.3s | ES patience: 6/15
+2026-04-11 16:08:29 | Epoch  75/100 | Loss: 5.4596 | MAE: 8.51 CL | r: 0.9579 | LR: 1.95e-08 | 18.4s | ES patience: 7/15
+2026-04-11 16:08:47 | Epoch  76/100 | Loss: 5.3963 | MAE: 8.58 CL | r: 0.9586 | LR: 1.95e-08 | 18.5s | ES patience: 8/15
+2026-04-11 16:09:06 | Epoch  77/100 | Loss: 5.4439 | MAE: 8.54 CL | r: 0.9583 | LR: 1.95e-08 | 18.5s | ES patience: 9/15
