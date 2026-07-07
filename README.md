@@ -5,9 +5,10 @@ Alzheimer's disease (AD) is a progressive neurodegenerative disorder and a criti
 
 This project implements a clinical-grade **3D Deep Learning pipeline** to predict **Centiloid scores**—a standardized metric of brain amyloid burden—directly from preprocessed 3D PET volumes. 
 
-This repository documents the evolutionary development of our solution:
-1. **Version 1 (Baseline):** A sequential 3D CNN with late-stage tracer concatenation.
-2. **Version 2 (Advanced - in [ABPET](file:///d:/MedicalArea/ABPET)):** A deep 3D ResNet-18 backbone utilizing **FiLM (Feature-wise Linear Modulation)** layers for intermediate multi-level tracer conditioning. Version 2 achieves a **51.8% reduction in prediction error** and operates with exceptional optimization stability.
+We investigated three model architectures located in the **[ABPET/models/](file:///d:/MedicalArea/ABPET/models/)** directory:
+1. **`Model_baseline.py` (`baseline1`):** A sequential 4-block 3D CNN with late concatenation of the tracer embedding (corresponds to **`result1`** / validation MAE: **19.77 CL**).
+2. **`Model_version1.py` (`model1`):** A deep 3D ResNet-18 architecture with late concatenation of the tracer embedding (corresponds to **`result2`** / validation MAE: **9.52 CL**). This model achieved the best generalization and stable convergence.
+3. **`Model_version2.py` (`model2`):** A deep 3D ResNet-18 utilizing **FiLM (Feature-wise Linear Modulation)** layers for multi-scale intermediate tracer conditioning. This model suffered from **overfitting**, so training/validation curves were not plotted.
 
 ---
 
@@ -30,32 +31,23 @@ Our contribution is the development of a model that **jointly represents** spati
 
 ---
 
-## 🛠️ Key Technical Contributions
+## 📊 Performance Comparison & Model Mapping
 
-* **Deep 3D Spatial Feature Extraction:** Designed and implemented a 3D Convolutional Neural Network (3D CNN) to process volumetric medical scans ($128 \times 128 \times 128$ voxels), capturing complex spatial voxel distributions of amyloid deposition across the brain cortex.
-* **Advanced Multi-Scale Tracer Conditioning (FiLM):** Formulated an advanced Feature-wise Linear Modulation (FiLM) network to inject tracer metadata channel-wise across multiple spatial resolutions of the network, neutralizing scanner/tracer variance early in the feature extraction process.
-* **Clinical Metric Alignment:** Optimized the network directly on **Mean Absolute Error (MAE)** in Centiloid units, aligning the loss function with clinical error tolerance.
-* **High-Throughput Data Pipeline:** Developed a custom PyTorch dataset with active memory caching to eliminate disk-bound bottlenecks for large 3D medical volumes.
-* **Rigorous Validation & Logging:** Automated metric tracking (loss, MAE, Pearson correlation) and generated detailed per-tracer validation reports for full transparency.
-
----
-
-## 📊 Evolutionary Performance Summary
-
-We compared the sequential Baseline CNN (Version 1) against the advanced ResNet-18 + FiLM architecture (Version 2) on a validation cohort of **500 samples**:
+We compared the three architectures on a validation cohort of **500 samples**:
 
 ### 1. Overall Metrics
-| Model Version | Architecture | Parameters | Val MAE (CL) | Pearson Correlation ($r$) | Status |
-| :--- | :--- | :---: | :---: | :---: | :--- |
-| **Version 1** | Sequential 3D CNN + Late Concatenation | 1,197,601 | 19.77 | 0.790 | Baseline |
-| **Version 2** | **3D ResNet-18 + FiLM Modulation** | **33,324,993** | **9.52** | **0.946** | **SOTA (51.8% Error Reduction)** |
+| Model Name | Source File | Architecture | Val MAE (CL) | Pearson $r$ | Outcome & Plot Mapping |
+| :--- | :--- | :--- | :---: | :---: | :--- |
+| **`baseline1`** | [`Model_baseline.py`](file:///d:/MedicalArea/ABPET/models/Model_baseline.py) | Sequential 3D CNN + Late Concatenation | 19.77 | 0.790 | Baseline Baseline (`result1` - Plotted) |
+| **`model1`** | [`Model_version1.py`](file:///d:/MedicalArea/ABPET/models/Model_version1.py) | **3D ResNet-18 + Late Concatenation** | **9.52** | **0.946** | **Best Generalization (`result2` - Plotted)** |
+| **`model2`** | [`Model_version2.py`](file:///d:/MedicalArea/ABPET/models/Model_version2.py) | 3D ResNet-18 + FiLM Conditioning | N/A | N/A | Overfit (Curves Not Plotted) |
 
-### 2. Per-Tracer Breakdown Comparison
-Version 2 achieves consistent clinical-grade predictions across all radiotracers, minimizing systematic imaging biases:
+### 2. Best Model (`model1`) Per-Tracer Breakdown
+[`Model_version1.py`](file:///d:/MedicalArea/ABPET/models/Model_version1.py) (`model1`) demonstrates consistent clinical-grade predictions across both carbon-11 and fluorine-18 tracers:
 
-| Radiotracer | Samples ($N$) | Version 1 MAE | Version 2 MAE | Version 1 Pearson $r$ | Version 2 Pearson $r$ | Improvement |
+| Radiotracer | Samples ($N$) | `baseline1` MAE | `model1` MAE | `baseline1` Pearson $r$ | `model1` Pearson $r$ | Error Reduction |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
-| **ALL Tracers** | **500** | **19.77** | **9.52** | **0.790** | **0.946** | **-51.8% MAE (SOTA)** |
+| **ALL Tracers** | **500** | **19.77** | **9.52** | **0.790** | **0.946** | **-51.8% MAE** |
 | `FBP` (Florbetapir) | 236 | 19.28 | 9.32 | 0.797 | 0.951 | -51.7% MAE |
 | `FBB` (Florbetaben) | 114 | 20.03 | 10.00 | 0.804 | 0.946 | -50.1% MAE |
 | `PIB` (Pittsburgh Compound B) | 133 | 21.16 | 9.63 | 0.790 | 0.943 | -54.5% MAE |
@@ -63,67 +55,57 @@ Version 2 achieves consistent clinical-grade predictions across all radiotracers
 
 ---
 
-## 🏗️ Deep Learning Architecture: Version 1 vs. Version 2
+## 🏗️ Model Architectures (Focus: `ABPET/models/`)
 
-### 1. Version 1: Sequential 3D CNN (Late Fusion)
-In the baseline model, spatial features are extracted through a standard sequential CNN. The tracer metadata is concatenated *at the very end* of the network:
-```
-[ 3D Brain Scan ] ──► [ Sequential CNN ] ──► [ Global Avg Pooling ] ─┐
-                                                                     ├─► [ Concatenate ] ──► [ MLP Head ] ──► [ Centiloid ]
-[ Tracer ID ] ─────────────────────────────► [ Tracer Embedding ] ──┘
-```
-* **Limitation:** The early convolutional layers are completely tracer-blind. They are forced to learn a single set of feature filters that must process all scans regardless of tracer intensity scales and noise distributions. The network can only perform a final shift in the regression MLP.
+### 1. `Model_baseline.py` (`baseline1`)
+* **Spatial Backbone:** 4 basic 3D convolutional blocks (Conv3D $\rightarrow$ BN $\rightarrow$ ReLU $\rightarrow$ MaxPool3D), sequentially compressing the $128 \times 128 \times 128$ voxel input to a 256-dimensional spatial feature vector after Global Average Pooling.
+* **Tracer Conditioning:** Late fusion. An 8-dimensional learnable tracer embedding is concatenated directly with the pooled spatial features before the fully connected layers.
+* **MLP Regression Head:** Fully connected network mapping $256 + 8 \rightarrow 128 \rightarrow 1$ to predict the Centiloid score.
 
-### 2. Version 2: 3D ResNet-18 + FiLM (Deep Modulation)
-Version 2 implements **FiLM (Feature-wise Linear Modulation)** layers after each of the 4 residual stages. The tracer embedding is projected into scale ($\gamma$) and shift ($\beta$) parameters that modulate the feature maps channel-wise throughout the encoder:
-```
-[ 3D Brain Scan ] ──► [ Stem ] ──► [ Layer1 ] ──► [ FiLM 1 ] ──► [ Layer2 ] ──► [ FiLM 2 ] ──► [ Layer3 ] ──► [ FiLM 3 ] ──► [ Layer4 ] ──► [ FiLM 4 ] ──► [ Pooling ] ──► [ MLP Head ] ──► [ Centiloid ]
-                                                     ▲                            ▲                            ▲                            ▲
-                                                     │                            │                            │                            │
-[ Tracer ID ] ──────────────► [ Tracer Embedding ] ─┴────────────────────────────┴────────────────────────────┴────────────────────────────┘
-```
-* **How FiLM works:** For a feature map $x_c$ in channel $c$:
+### 2. `Model_version1.py` (`model1`)
+* **Spatial Backbone:** 3D ResNet-18 backbone consisting of a convolutional stem followed by 4 residual stages containing 2 residual blocks (`BasicBlock3D`) each. This projects the brain volume into a 512-dimensional spatial vector.
+* **Tracer Conditioning:** Late fusion. A 64-dimensional learnable tracer embedding is concatenated with the 512-dimensional spatial features.
+* **MLP Regression Head:** Deep regressional MLP (`Linear(576, 256)` $\rightarrow$ `LayerNorm` $\rightarrow$ `ReLU` $\rightarrow$ `Dropout(0.5)` $\rightarrow$ `Linear(256, 64)` $\rightarrow$ `ReLU` $\rightarrow$ `Linear(64, 1)`).
+
+### 3. `Model_version2.py` (`model2`)
+* **Spatial Backbone:** 3D ResNet-18 backbone with an Average Pooling stem to retain higher-resolution spatial details.
+* **Tracer Conditioning:** Feature-wise Linear Modulation (FiLM). The 64-dimensional tracer embedding is projected at each of the 4 residual stages into scale ($\gamma$) and shift ($\beta$) vectors to dynamically modulate intermediate feature maps channel-wise:
 $$\text{FiLM}(x_c) = \gamma_c(\mathbf{emb}) \cdot x_c + \beta_c(\mathbf{emb})$$
-* **Advantages:** 
-  1. The network adapts its feature extraction dynamically at multiple spatial resolutions.
-  2. The early layers can normalize scanner-specific intensity scales and filter background noise before passing features deeper.
+* **MLP Regression Head:** Bypasses late fusion, sending the pooled 512-dimensional modulated vector straight into the MLP regressor head.
 
 ---
 
-## 🧠 Scientific Analysis: Why Version 2 Performs Better
+## 🧠 Scientific Analysis: Model Design & Training Dynamics
 
-The dramatic improvement in predictive power (lower MAE) and learning stability (smoother training curves) in Version 2 stems from three core model design principles:
+### 1. Why `model1` (`Model_version1.py`) Outperforms `baseline1` (`Model_baseline.py`)
+* **Substantially Lower MAE (9.52 vs. 19.77 CL):** The ResNet-18 backbone contains 18 convolutional layers with identity mapping, drastically increasing representational capacity compared to the 4-layer baseline. This allows the network to learn fine-grained spatial distributions of amyloid plaques across distinct cortical structures.
+* **More Stable Training Line (Smoother Learning Curves):** Volumetric 3D convolutions suffer from vanishing gradients during backpropagation. The baseline CNN's sequential structure has no gradient shortcut paths, leading to volatile gradient updates and validation metric oscillation. `model1` uses residual skip connections ($x + F(x)$), which act as gradient highways that propagate optimization signals directly back to early convolutional layers, smoothing the loss landscape and ensuring stable, monotonic convergence.
 
-### 1. Why Version 2 Has a Lower MAE
-* **Increased Representational Capacity:** Version 2 upgrades the backbone from a 4-layer sequential 3D CNN (1.2M parameters) to a deep 3D ResNet-18 (33.3M parameters). The residual architecture allows the network to learn deeper, highly non-linear, multi-scale spatial combinations of amyloid distribution across brain sub-regions (e.g., neocortex vs. white matter).
-* **Early & Intermediate Normalization (FiLM):** Because different tracers (e.g., Fluorine-18 vs. Carbon-11 compounds) have distinct uptake behaviors and non-specific binding noise, a tracer-blind encoder (Version 1) suffers from high variance. The intermediate FiLM layers dynamically scale ($\gamma$) and shift ($\beta$) activations at every level of the network. This allows the network to perform "in-network calibration"—essentially normalising the visual characteristics of all tracers to a common representation space *before* the final regression head, leading to highly accurate, generalizable Centiloid predictions.
-* **Volumetric Average Pooling Stem:** In the ResNet stem, replacing MaxPool3D with AvgPool3D preserves structural boundary information and attenuates voxel-level noise, conserving subtle diagnostic indicators.
-
-### 2. Why Version 2 Exhibits a More Stable Training Line
-* **Residual Skip Connections (Gradient Highways):** Deep 3D networks suffer from severe vanishing and exploding gradient problems due to multi-dimensional convolution chains. The residual skip connections ($x + F(x)$) provide an uninterrupted gradient highway directly from the loss function back to the initial stem. This stabilizes backpropagation, resulting in a smooth loss descent without the volatile oscillations seen in sequential architectures.
-* **FiLM Identity Initialization:** We initialize the linear projections for the FiLM layers such that $\gamma$ weights are zero (biases are one) and $\beta$ weights/biases are zero. Consequently, at epoch 1:
-$$\gamma = 1, \quad \beta = 0 \implies \text{FiLM}(x_c) = 1 \cdot x_c + 0 = x_c$$
-This initialization guarantees that the network starts training as a standard, stable ResNet, and only learns tracer-specific perturbations gradually. This avoids chaotic gradient steps in early epochs.
-* **Layer Normalization:** Version 2 incorporates `LayerNorm` in the regression MLP head, which bounds layer activations, preventing high variance in predictions during backpropagation and stabilizing validation scores.
+### 2. Why `model2` (`Model_version2.py`) Suffered from Overfitting
+* **Over-Parameterization of Intermediate Layers:** FiLM injects tracer conditioning parameters ($\gamma$ and $\beta$) after *every* residual stage. This grants the model multi-scale control to scale and shift intermediate feature maps channel-wise based on tracer metadata. 
+* **Memorization of Tracer-Specific Noise:** With a limited dataset of 2,000 samples, the high degrees of freedom in the FiLM layers allowed the network to memorize tracer-specific visual styles, intensity scaling, and scanning protocol artifacts of the training samples. Instead of learning to extract clinical markers of amyloid plaques that generalize across subjects, the feature extractor adjusted its intermediate filters to minimize training loss by memorizing individual training scans.
+* **Regularization Benefit of Late Fusion in `model1`:** In `model1`, the ResNet-18 backbone is completely tracer-blind. It is forced to learn a single set of feature filters that extract anatomical plaque distributions independent of the tracer identity. The tracer identity is only merged at the final MLP layer to adjust output scales and offsets. This restriction serves as an implicit regularizer, preventing tracer-specific spatial memorization and leading to superior validation generalization.
 
 ---
 
-## 📈 Learning Curves Comparison
+## 📈 Experimental Curves Comparison
 
-### Version 1 (Baseline 3D CNN)
-The baseline model training exhibits higher volatility, with validation performance oscillating:
+### `result1` (`baseline1` - Sequential 3D CNN)
+The baseline training curves show higher volatility, with validation MAE and Pearson correlation oscillating during optimization:
 
-![Version 1 Learning Curves](ABPET/results/curves_20260410_130422.png)
+![Version 1 Baseline Curves](ABPET/results/curves_20260410_130422.png)
 
-### Version 2 (3D ResNet-18 + FiLM)
-The training progression for Version 2 shows a highly stable, smooth optimization curve, with validation MAE descending steadily to **9.52 CL** without oscillating:
+### `result2` (`model1` - 3D ResNet-18 Late Fusion)
+The training progression for `model1` shows a stable, smooth descent, with validation MAE converging to **9.52 CL** without oscillating:
 
-![Version 2 Learning Curves](ABPET/results/curves_20260411_145043.png)
+![Version 1 Model 1 Curves](ABPET/results/curves_20260411_145043.png)
+
+*(Note: No training curves are drawn for `model2` due to validation overfitting.)*
 
 ---
 
 ## 💾 Preprocessing Pipeline (Data Standardization)
-All raw NIfTI PET scans are standardized using the following pipeline to prepare them for both models:
+All raw NIfTI PET scans are standardized using the following pipeline to prepare them for the networks:
 1. **Orientation to RAS:** Reoriented raw volumes to RAS (Right-Anterior-Superior) standard neuroimaging alignment to unify spatial directions.
 2. **Isotropic Resampling:** Resampled scans to a uniform $2\text{mm} \times 2\text{mm} \times 2\text{mm}$ voxel spacing using trilinear interpolation, resolving resolution differences between scanners.
 3. **Foreground Cropping:** Removed background air/non-brain voxels with a 10-voxel margin to reduce spatial dimensionality and focus computational resources on brain tissues.
@@ -141,18 +123,24 @@ MedicalArea/
 ├── ABPET/                    # Version 2 Advanced Codebase
 │   ├── checkpoints/          # Saved ResNet-18 model weights
 │   ├── logs/                 # Version 2 training logs
-│   ├── models/               # ResNet-18 and FiLM model architecture
-│   ├── results/              # Curves and val reports for Version 2
-│   ├── train.py              # Version 2 training script
+│   ├── models/               # The Three Model Architectures
+│   │   ├── Model_baseline.py # baseline1 (Sequential 3D CNN)
+│   │   ├── Model_version1.py # model1 (3D ResNet-18 Late Fusion)
+│   │   ├── Model_version2.py # model2 (3D ResNet-18 + FiLM) - OVERFIT
+│   │   └── losses.py         # Loss functions
+│   ├── results/              # Curves and val reports
+│   │   ├── curves_*.png      # Curves for baseline1 and model1
+│   │   └── val_report_*.csv  # Validation report for model1 (9.52 CL MAE)
+│   ├── train.py              # Advanced training script
 │   └── dataset.py / predict.py / predict.sh
 │
-├── checkpoints/              # Version 1 Saved model weights (Baseline)
-├── logs/                     # Version 1 training logs (Baseline)
-├── models/                   # Version 1 baseline model architecture
-├── results/                  # Curves and val reports for Version 1
-├── dataset.py                # Version 1 dataset loading
-├── train.py                  # Version 1 training script
-├── predict.py / predict.sh   # Version 1 inference tools
+├── checkpoints/              # Root checkpoints (Legacy)
+├── logs/                     # Root logs (Legacy)
+├── models/                   # Root models (Legacy)
+├── results/                  # Root results (Legacy)
+├── dataset.py                # Root dataset loader
+├── train.py                  # Root training script
+├── predict.py / predict.sh   # Root inference tools
 ├── visualize_pet.ipynb       # Jupyter Notebook for brain image inspection
 └── requirements.txt          # Python dependencies
 ```
@@ -164,8 +152,10 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### Running Model Training (Version 2)
-To run training for the advanced ResNet-18 + FiLM model:
+### Running Model Training (in `ABPET`)
+To train `model1` (the best performer):
+1. Copy `ABPET/models/Model_version1.py` to `ABPET/models/model.py` (or modify `train.py` import to point to `Model_version1`).
+2. Run the training script:
 ```bash
 cd ABPET
 python train.py \
@@ -180,7 +170,7 @@ python train.py \
   --scheduler plateau
 ```
 
-### Running Inference on New Patient Scans (Version 2)
+### Running Inference (in `ABPET`)
 To predict Centiloid scores for a set of new patient PET scans:
 ```bash
 cd ABPET
@@ -190,7 +180,6 @@ bash predict.sh /path/to/input.csv checkpoints/best_model.pt predictions.csv
 ---
 
 ## 🧑‍🤝‍🧑 Team Contributions
-
 The project was completed as a collaborative effort:
 * **Computer Science Development Core:**
   * **Data & Pipeline Lead:** Built the `dataset.py` caching engine, integrated MONAI/PyTorch preprocessing interfaces, and managed validation splitting.
